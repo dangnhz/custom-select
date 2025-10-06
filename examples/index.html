@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Select - Examples</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    h1 {
+      color: #1f2937;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      color: #374151;
+      margin-top: 3rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    h3 {
+      color: #1f2937;
+      margin-top: 2rem;
+    }
+
+    .example {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      background: #f9fafb;
+    }
+
+    .example h3 {
+      margin-top: 0;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 0.375rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+
+    pre {
+      background: #1f2937;
+      color: #f9fafb;
+      padding: 1rem;
+      border-radius: 0.375rem;
+      overflow-x: auto;
+      font-size: 0.875rem;
+    }
+
+    code {
+      font-family: 'Courier New', monospace;
+    }
+
+    .config-section {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: white;
+      border-radius: 0.375rem;
+      border: 1px solid #d1d5db;
+    }
+
+    .config-section h4 {
+      margin: 0 0 0.5rem 0;
+      color: #374151;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🎯 Custom Select - Complete Examples</h1>
+  <p>Explore different use cases and configurations for both SingleSelect and MultiSelect components.</p>
+
+  <h2>🔘 SingleSelect Examples</h2>
+
+  <div class="example">
+    <h3>Basic Single Select</h3>
+    <div class="form-group">
+      <label for="single-basic">Select a Country:</label>
+      <select id="single-basic">
+        <option value="">Choose a country...</option>
+        <option value="us">United States</option>
+        <option value="uk">United Kingdom</option>
+        <option value="ca">Canada</option>
+        <option value="au">Australia</option>
+        <option value="de">Germany</option>
+        <option value="fr">France</option>
+        <option value="jp">Japan</option>
+        <option value="cn">China</option>
+      </select>
+    </div>
+    <div class="config-section">
+      <h4>Configuration</h4>
+      <pre><code>new SingleSelect('#single-basic', {
+      showRadioButtons: false,
+      searchEnabled: true,
+      closeOnSelect: true,
+      showClose: false,
+      placeholder: 'Choose a country...'
+});</code></pre>
+    </div>
+  </div>
+
+  <div class="example">
+    <h3>With Radio Buttons</h3>
+    <div class="form-group">
+      <label for="single-radio">Select a Programming Language:</label>
+      <select id="single-radio">
+        <option value="">Choose a language...</option>
+        <option value="js">JavaScript</option>
+        <option value="ts">TypeScript</option>
+        <option value="py">Python</option>
+        <option value="go">Go</option>
+        <option value="rust">Rust</option>
+        <option value="java">Java</option>
+      </select>
+    </div>
+    <div class="config-section">
+      <h4>Configuration</h4>
+      <pre><code>new SingleSelect('#single-radio', {
+  showRadioButtons: true,
+  searchEnabled: true,
+  closeOnSelect: true,
+  placeholder: 'Choose a language...'
+});</code></pre>
+    </div>
+  </div>
+
+  <div class="example">
+    <h3>Nested Single Select</h3>
+    <div class="form-group">
+      <label for="single-nested">Select a Technology:</label>
+      <select id="single-nested">
+        <option value="">Choose a technology...</option>
+        <optgroup label="Frontend">
+          <option value="react">React</option>
+          <option value="vue">Vue</option>
+          <option value="angular">Angular</option>
+        </optgroup>
+        <optgroup label="Backend">
+          <option value="node">Node.js</option>
+          <option value="django">Django</option>
+          <option value="rails">Ruby on Rails</option>
+        </optgroup>
+        <optgroup label="Database">
+          <option value="postgres">PostgreSQL</option>
+          <option value="mongodb">MongoDB</option>
+          <option value="mysql">MySQL</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="config-section">
+      <h4>Configuration</h4>
+      <pre><code>new SingleSelect('#single-nested', {
+  nestedOptions: true,
+  showRadioButtons: true,
+  searchEnabled: true,
+  defaultExpanded: true,
+  closeOnSelect: true,
+  placeholder: 'Choose a technology...'
+});</code></pre>
+    </div>
+  </div>
+
+  <h2>☑️ MultiSelect Examples</h2>
+
+  <div class="example">
+    <h3>Default Configuration</h3>
+    <div class="form-group">
+      <label for="select1">Select Countries:</label>
+      <select id="select1" multiple>
+        <option value="us">United States</option>
+        <option value="uk">United Kingdom</option>
+        <option value="ca">Canada</option>
+        <option value="au">Australia</option>
+        <option value="de">Germany</option>
+        <option value="fr">France</option>
+        <option value="jp">Japan</option>
+        <option value="cn">China</option>
+      </select>
+    </div>
+    <div class="config-section">
+      <h4>Configuration</h4>
+      <pre><code>new MultiSelect('#select1', {
+  placeholder: 'Select countries...',
+  searchEnabled: true,
+  searchAutoFocus: true,
+});</code></pre>
+    </div>
+  </div>
+
+  <div class="example">
+    <h3>Tags Display Mode</h3>
+    <div class="form-group">
+      <label for="select2">Select Technologies:</label>
+      <select id="select2" multiple>
+        <option value="js">JavaScript</option>
+        <option value="ts">TypeScript</option>
+        <option value="py">Python</option>
+        <option value="go">Go</option>
+        <option value="rust">Rust</option>
+        <option value="java">Java</option>
+        <option value="csharp">C#</option>
+      </select>
+    </div>
+    <div class="config-section">
+      <h4>Configuration</h4>
+      <pre><code>new MultiSelect('#select2', {
+  selectedDisplayMode: 'tags',
+  maxTags: 3,
+  placeholder: 'Select technologies...'
+});</code></pre>
+    </div>
+  </div>
+
+  <div class="example">
+    <h3>List Display Mode</h3>
+    <div class="form-group">
+      <label for="select3">Select Colors:</label>
+      <select id="select3" multiple>
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+        <option value="yellow">Yellow</option>
+        <option value="purple">Purple</option>
+        <option value="orange">Orange</option>
+      </select>
+    </div>
+    <div class="config-section">
+      <h4>Configuration</h4>
+      <pre><code>new MultiSelect('#select3', {
+  selectedDisplayMode: 'list',
+  maxSelectedDisplay: 2,
+  placeholder: 'Select colors...'
+});</code></pre>
+    </div>
+  </div>
+
+  <div class="example">
+    <h3>Programmatic Control</h3>
+    <div class="form-group">
+      <label for="select4">Select Days:</label>
+      <select id="select4" multiple>
+        <option value="mon">Monday</option>
+        <option value="tue">Tuesday</option>
+        <option value="wed">Wednesday</option>
+        <option value="thu">Thursday</option>
+        <option value="fri">Friday</option>
+        <option value="sat">Saturday</option>
+        <option value="sun">Sunday</option>
+      </select>
+    </div>
+    <button onclick="selectWeekdays()">Select Weekdays</button>
+    <button onclick="selectWeekend()">Select Weekend</button>
+    <button onclick="clearSelection()">Clear All</button>
+    <div class="config-section">
+      <h4>Configuration</h4>
+      <pre><code>const ms4 = new MultiSelect('#select4', {
+  placeholder: 'Select days...',
+  showClearAll: false
+});
+
+// Programmatic methods
+window.selectWeekdays = () => {
+  ms4.setValue(['mon', 'tue', 'wed', 'thu', 'fri']);
+};
+
+window.selectWeekend = () => {
+  ms4.setValue(['sat', 'sun']);
+};
+
+window.clearSelection = () => {
+  ms4.clearAll();
+};</code></pre>
+    </div>
+  </div>
+
+  <h2>🌲 Nested Options Examples</h2>
+
+  <div class="example">
+    <h3>File System Browser</h3>
+    <div class="form-group">
+      <label for="files-select">Select Files:</label>
+      <select id="files-select" multiple>
+        <optgroup label="Documents">
+          <option value="doc1.pdf">Annual Report.pdf</option>
+          <option value="doc2.docx">Meeting Notes.docx</option>
+          <option value="doc3.xlsx">Budget.xlsx</option>
+        </optgroup>
+        <optgroup label="Images">
+          <option value="img1.png">Logo.png</option>
+          <option value="img2.jpg">Photo.jpg</option>
+          <option value="img3.svg">Icon.svg</option>
+        </optgroup>
+        <optgroup label="Code">
+          <option value="code1.js">app.js</option>
+          <option value="code2.ts">types.ts</option>
+          <option value="code3.css">styles.css</option>
+        </optgroup>
+      </select>
+    </div>
+    <button onclick="expandAll()">Expand All</button>
+    <button onclick="collapseAll()">Collapse All</button>
+    <div class="config-section">
+      <h4>Configuration</h4>
+      <pre><code>const filesMs = new MultiSelect('#files-select', {
+  nestedOptions: true,
+  defaultExpanded: true,
+  searchEnabled: true,
+  expandOnSearch: true,
+  placeholder: 'Browse files...'
+});
+
+// Expand/collapse methods
+window.expandAll = () => filesMs.expandAll();
+window.collapseAll = () => filesMs.collapseAll();</code></pre>
+    </div>
+  </div>
+
+  <div class="example">
+    <h3>With Cascade Selection</h3>
+    <div class="form-group">
+      <label for="cascade-select">Select Permissions:</label>
+      <select id="cascade-select" multiple>
+        <optgroup label="Admin">
+          <option value="admin.read">Read</option>
+          <option value="admin.write">Write</option>
+          <option value="admin.delete">Delete</option>
+        </optgroup>
+        <optgroup label="User">
+          <option value="user.read">Read</option>
+          <option value="user.write">Write</option>
+        </optgroup>
+        <optgroup label="Guest">
+          <option value="guest.read">Read Only</option>
+        </optgroup>
+      </select>
+    </div>
+    <p><em>Selecting a group will select all its options</em></p>
+    <div class="config-section">
+      <h4>Configuration</h4>
+      <pre><code>new MultiSelect('#cascade-select', {
+  nestedOptions: true,
+  cascadeSelection: true,
+  showParentCheckbox: true,
+  defaultExpanded: true,
+  placeholder: 'Select permissions...'
+});</code></pre>
+    </div>
+  </div>
+
+  <div class="example">
+    <h3>Organization Structure</h3>
+    <div class="form-group">
+      <label for="org-select">Select Departments:</label>
+      <select id="org-select" multiple>
+        <optgroup label="Engineering">
+          <option value="eng.frontend">Frontend</option>
+          <option value="eng.backend">Backend</option>
+          <option value="eng.devops">DevOps</option>
+          <option value="eng.qa">QA</option>
+        </optgroup>
+        <optgroup label="Product">
+          <option value="prod.design">Design</option>
+          <option value="prod.pm">Product Management</option>
+          <option value="prod.research">User Research</option>
+        </optgroup>
+        <optgroup label="Business">
+          <option value="biz.sales">Sales</option>
+          <option value="biz.marketing">Marketing</option>
+          <option value="biz.support">Support</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="config-section">
+      <h4>Configuration</h4>
+      <pre><code>new MultiSelect('#org-select', {
+  nestedOptions: true,
+  selectedDisplayMode: 'tags',
+  defaultExpanded: true,
+  searchEnabled: true,
+  placeholder: 'Select departments...'
+});</code></pre>
+    </div>
+  </div>
+
+  <h2>📚 Features</h2>
+  <ul>
+    <li><strong>Single & Multi-Select</strong> - Both modes supported with full feature parity</li>
+    <li><strong>Zero Dependencies</strong> - Pure TypeScript/JavaScript</li>
+    <li><strong>Accessible</strong> - WCAG 2.1 AA compliant with full keyboard support</li>
+    <li><strong>Nested Options</strong> - Support for hierarchical selections</li>
+    <li><strong>Display Modes</strong> - Count, list, tags, or custom display (multi-select)</li>
+    <li><strong>Themeable</strong> - 55+ CSS variables for customization</li>
+    <li><strong>Lightweight</strong> - &lt;15KB minified + gzipped</li>
+  </ul>
+
+  <script type="module">
+    import { MultiSelect, SingleSelect } from '../src/index.ts';
+
+    // SingleSelect - Basic
+    new SingleSelect('#single-basic', {
+      showRadioButtons: false,
+      searchEnabled: true,
+      closeOnSelect: true,
+      showClose: false,
+      placeholder: 'Choose a country...'
+    });
+
+    // SingleSelect - Radio buttons
+    new SingleSelect('#single-radio', {
+      showRadioButtons: true,
+      searchEnabled: true,
+      closeOnSelect: true,
+      placeholder: 'Choose a language...'
+    });
+
+    // SingleSelect - Nested
+    new SingleSelect('#single-nested', {
+      nestedOptions: true,
+      showRadioButtons: true,
+      searchEnabled: true,
+      defaultExpanded: true,
+      closeOnSelect: true,
+      placeholder: 'Choose a technology...'
+    });
+
+    // MultiSelect - Default
+    new MultiSelect('#select1', {
+      placeholder: 'Select countries...',
+      searchEnabled: true,
+      searchAutoFocus: true,
+    });
+
+    // Tags mode
+    new MultiSelect('#select2', {
+      selectedDisplayMode: 'tags',
+      maxTags: 3,
+      placeholder: 'Select technologies...'
+    });
+
+    // List mode
+    new MultiSelect('#select3', {
+      selectedDisplayMode: 'list',
+      maxSelectedDisplay: 2,
+      placeholder: 'Select colors...'
+    });
+
+    // Programmatic control
+    const ms4 = new MultiSelect('#select4', {
+      placeholder: 'Select days...',
+      showClearAll: false
+    });
+
+    window.selectWeekdays = () => {
+      ms4.setValue(['mon', 'tue', 'wed', 'thu', 'fri']);
+    };
+
+    window.selectWeekend = () => {
+      ms4.setValue(['sat', 'sun']);
+    };
+
+    window.clearSelection = () => {
+      ms4.clearAll();
+    };
+
+    // File system with expand/collapse
+    const filesMs = new MultiSelect('#files-select', {
+      nestedOptions: true,
+      defaultExpanded: true,
+      searchEnabled: true,
+      expandOnSearch: true,
+      placeholder: 'Browse files...'
+    });
+
+    window.expandAll = () => filesMs.expandAll();
+    window.collapseAll = () => filesMs.collapseAll();
+
+    // Cascade selection
+    new MultiSelect('#cascade-select', {
+      nestedOptions: true,
+      cascadeSelection: true,
+      showParentCheckbox: true,
+      defaultExpanded: true,
+      placeholder: 'Select permissions...'
+    });
+
+    // Organization
+    new MultiSelect('#org-select', {
+      nestedOptions: true,
+      selectedDisplayMode: 'tags',
+      defaultExpanded: true,
+      searchEnabled: true,
+      placeholder: 'Select departments...'
+    });
+  </script>
+</body>
+
+</html>

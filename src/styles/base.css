@@ -1,0 +1,144 @@
+/**
+ * Base Styles - Shared CSS Custom Properties
+ * Used by both MultiSelect and SingleSelect components
+ */
+
+/* ===========================
+   CSS Custom Properties
+   =========================== */
+
+:root {
+  /* Trigger Button */
+  --ms-trigger-bg: #ffffff;
+  --ms-trigger-border: #d1d5db;
+  --ms-trigger-border-open: #3b82f6;
+  --ms-trigger-text: #1f2937;
+  --ms-trigger-padding: 0.5rem 1rem;
+  --ms-trigger-radius: 0.375rem;
+  --ms-trigger-min-height: 2.5rem;
+  --ms-trigger-focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.3);
+  --ms-trigger-hover-bg: #f9fafb;
+
+  /* Dropdown Panel */
+  --ms-dropdown-bg: #ffffff;
+  --ms-dropdown-border: #d1d5db;
+  --ms-dropdown-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --ms-dropdown-radius: 0.375rem;
+  --ms-dropdown-max-height: 20rem;
+  --ms-dropdown-z-index: 50;
+
+  /* Search Input */
+  --ms-search-bg: #ffffff;
+  --ms-search-border: #e5e7eb;
+  --ms-search-text: #1f2937;
+  --ms-search-padding: 0.5rem 0.75rem;
+  --ms-search-radius: 0.25rem;
+  --ms-search-focus-ring: 0 0 0 2px rgba(59, 130, 246, 0.3);
+
+  /* Options */
+  --ms-option-padding: 0.5rem 0.75rem;
+  --ms-option-hover-bg: #f3f4f6;
+  --ms-option-selected-bg: #eff6ff;
+  --ms-option-selected-text: #1e40af;
+  --ms-option-disabled-bg: #f9fafb;
+  --ms-option-disabled-text: #9ca3af;
+  --ms-option-focused-bg: #dbeafe;
+  --ms-option-focus-outline-color: #3b82f6;
+  --ms-option-indent-size: 1.25rem;
+
+  /* Checkbox */
+  --ms-checkbox-size: 1rem;
+  --ms-checkbox-color: #3b82f6;
+  --ms-checkbox-bg: #ffffff;
+  --ms-checkbox-border: #d1d5db;
+  --ms-checkbox-indeterminate-color: #6b7280;
+
+  /* Nested Groups */
+  --ms-group-bg: #f9fafb;
+  --ms-group-text-color: #374151;
+  --ms-group-font-weight: 600;
+  --ms-expand-icon-color: #6b7280;
+  --ms-expand-icon-size: 0.75rem;
+
+  /* Tags */
+  --ms-tag-bg: #e0e7ff;
+  --ms-tag-text-color: #3730a3;
+  --ms-tag-padding: 0.125rem 0.5rem;
+  --ms-tag-border-radius: 0.25rem;
+  --ms-tag-close-size: 1rem;
+  --ms-tag-close-color: #6366f1;
+  --ms-tag-gap: 0.25rem;
+
+  /* Footer */
+  --ms-footer-bg: #f9fafb;
+  --ms-footer-border-top: #e5e7eb;
+  --ms-footer-padding: 0.5rem 0.75rem;
+
+  /* Buttons */
+  --ms-button-bg: transparent;
+  --ms-button-text: #3b82f6;
+  --ms-button-hover-bg: #eff6ff;
+  --ms-button-padding: 0.375rem 0.75rem;
+  --ms-button-radius: 0.25rem;
+  --ms-button-focus-ring: 0 0 0 2px rgba(59, 130, 246, 0.3);
+
+  /* Scrollbar */
+  --ms-scrollbar-width: 8px;
+  --ms-scrollbar-track-bg: #f1f1f1;
+  --ms-scrollbar-thumb-bg: #888888;
+  --ms-scrollbar-thumb-hover-bg: #555555;
+  --ms-scrollbar-thumb-radius: 4px;
+
+  /* Animation */
+  --ms-animation-duration: 150ms;
+  --ms-animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===========================
+   Dark Mode Overrides
+   =========================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ms-trigger-bg: #1f2937;
+    --ms-trigger-border: #374151;
+    --ms-trigger-border-open: #60a5fa;
+    --ms-trigger-text: #f9fafb;
+    --ms-trigger-hover-bg: #374151;
+
+    --ms-dropdown-bg: #1f2937;
+    --ms-dropdown-border: #374151;
+    --ms-dropdown-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+
+    --ms-search-bg: #374151;
+    --ms-search-border: #4b5563;
+    --ms-search-text: #f9fafb;
+
+    --ms-option-hover-bg: #374151;
+    --ms-option-selected-bg: #1e40af;
+    --ms-option-selected-text: #bfdbfe;
+    --ms-option-focused-bg: #1e3a8a;
+    --ms-option-focus-outline-color: #60a5fa;
+    --ms-option-disabled-bg: #374151;
+    --ms-option-disabled-text: #6b7280;
+
+    --ms-checkbox-bg: #374151;
+    --ms-checkbox-border: #4b5563;
+
+    --ms-group-bg: #111827;
+    --ms-group-text-color: #d1d5db;
+
+    --ms-tag-bg: #1e40af;
+    --ms-tag-text-color: #bfdbfe;
+
+    --ms-footer-bg: #111827;
+    --ms-footer-border-top: #374151;
+
+    --ms-button-text: #60a5fa;
+    --ms-button-hover-bg: #1e3a8a;
+
+    --ms-scrollbar-track-bg: #1f2937;
+    --ms-scrollbar-thumb-bg: #4b5563;
+    --ms-scrollbar-thumb-hover-bg: #6b7280;
+  }
+}

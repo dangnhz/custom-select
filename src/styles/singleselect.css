@@ -1,0 +1,376 @@
+/**
+ * SingleSelect Dropdown Styles
+ * Framework-agnostic single-select component
+ */
+
+/* ===========================
+   Base Styles
+   =========================== */
+
+.ss-singleselect *,
+.ss-singleselect *::before,
+.ss-singleselect *::after {
+  box-sizing: border-box;
+}
+
+/* ===========================
+   Container
+   =========================== */
+
+.ss-singleselect {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Trigger Button */
+.ss-singleselect__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: var(--ms-trigger-min-height);
+  padding: var(--ms-trigger-padding);
+  background-color: var(--ms-trigger-bg);
+  border: 1px solid var(--ms-trigger-border);
+  border-radius: var(--ms-trigger-radius);
+  color: var(--ms-trigger-text);
+  cursor: pointer;
+  transition: background-color var(--ms-animation-duration) var(--ms-animation-easing),
+              border-color var(--ms-animation-duration) var(--ms-animation-easing);
+}
+
+.ss-singleselect__trigger:hover:not(:disabled) {
+  background-color: var(--ms-trigger-hover-bg);
+}
+
+.ss-singleselect__trigger:focus {
+  outline: none;
+  box-shadow: var(--ms-trigger-focus-ring);
+}
+
+.ss-singleselect__trigger:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ss-singleselect__trigger--open {
+  border-color: var(--ms-trigger-border-open);
+}
+
+.ss-singleselect__trigger-text {
+  flex: 1;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ss-singleselect__caret {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 0.5rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform var(--ms-animation-duration) var(--ms-animation-easing);
+}
+
+.ss-singleselect__trigger--open .ss-singleselect__caret {
+  transform: rotate(-135deg);
+}
+
+/* Dropdown Panel */
+.ss-singleselect__dropdown {
+  position: absolute;
+  z-index: var(--ms-dropdown-z-index);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--ms-dropdown-bg);
+  border: 1px solid var(--ms-dropdown-border);
+  border-radius: var(--ms-dropdown-radius);
+  box-shadow: var(--ms-dropdown-shadow);
+  overflow: hidden;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--ms-animation-duration) var(--ms-animation-easing),
+    transform var(--ms-animation-duration) var(--ms-animation-easing);
+}
+
+.ss-singleselect__dropdown--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+}
+
+.ss-singleselect__dropdown--top {
+  margin-bottom: 0.25rem;
+}
+
+.ss-singleselect__dropdown--top.ss-singleselect__dropdown--hidden {
+  transform: translateY(8px);
+}
+
+.ss-singleselect__dropdown--bottom {
+  margin-top: 0.25rem;
+}
+
+.ss-singleselect__dropdown--bottom.ss-singleselect__dropdown--hidden {
+  transform: translateY(-8px);
+}
+
+/* Search Input */
+.ss-singleselect__search {
+  flex-shrink: 0;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--ms-search-border);
+}
+
+.ss-singleselect__search-input {
+  width: 100%;
+  padding: var(--ms-search-padding);
+  background-color: var(--ms-search-bg);
+  border: 1px solid var(--ms-search-border);
+  border-radius: var(--ms-search-radius);
+  color: var(--ms-search-text);
+  font-size: 0.875rem;
+}
+
+.ss-singleselect__search-input:focus {
+  outline: none;
+  box-shadow: var(--ms-search-focus-ring);
+}
+
+/* Options List */
+.ss-singleselect__options {
+  flex: 1 1 auto;
+  max-height: var(--ms-dropdown-max-height);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.ss-singleselect__option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: var(--ms-option-padding);
+  cursor: pointer;
+  transition: background-color var(--ms-animation-duration) var(--ms-animation-easing);
+  user-select: none;
+}
+
+.ss-singleselect__option:hover:not(.ss-singleselect__option--disabled) {
+  background-color: var(--ms-option-hover-bg);
+}
+
+.ss-singleselect__option--selected {
+  background-color: var(--ms-option-selected-bg);
+  color: var(--ms-option-selected-text);
+}
+
+.ss-singleselect__option--focused {
+  background-color: var(--ms-option-focused-bg);
+  outline: 2px solid var(--ms-option-focus-outline-color);
+  outline-offset: -2px;
+}
+
+.ss-singleselect__option--disabled {
+  background-color: var(--ms-option-disabled-bg);
+  color: var(--ms-option-disabled-text);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.ss-singleselect__option--parent {
+  background-color: var(--ms-group-bg);
+  color: var(--ms-group-text-color);
+  font-weight: var(--ms-group-font-weight);
+}
+
+/* Nested levels */
+.ss-singleselect__option--level-1 { padding-left: calc(var(--ms-option-indent-size) * 1); }
+.ss-singleselect__option--level-2 { padding-left: calc(var(--ms-option-indent-size) * 2); }
+.ss-singleselect__option--level-3 { padding-left: calc(var(--ms-option-indent-size) * 3); }
+.ss-singleselect__option--level-4 { padding-left: calc(var(--ms-option-indent-size) * 4); }
+.ss-singleselect__option--level-5 { padding-left: calc(var(--ms-option-indent-size) * 5); }
+
+/* Expand Icon */
+.ss-singleselect__expand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ms-expand-icon-size);
+  color: var(--ms-expand-icon-color);
+  font-size: var(--ms-expand-icon-size);
+  transition: transform var(--ms-animation-duration) var(--ms-animation-easing);
+}
+
+.ss-singleselect__expand-icon--expanded {
+  transform: rotate(0deg);
+}
+
+/* Radio Button (Custom Styled) */
+.ss-singleselect__radio-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  user-select: none;
+  margin: 0;
+}
+
+.ss-singleselect__radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.ss-singleselect__radio-custom {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  width: var(--ms-checkbox-size);
+  height: var(--ms-checkbox-size);
+  border: 2px solid var(--ms-checkbox-border);
+  border-radius: 50%;
+  background-color: var(--ms-checkbox-bg);
+  transition: all var(--ms-animation-duration) var(--ms-animation-easing);
+}
+
+/* Hover state */
+.ss-singleselect__radio-label:hover .ss-singleselect__radio-custom {
+  border-color: var(--ms-checkbox-color);
+}
+
+/* Focus state */
+.ss-singleselect__radio:focus + .ss-singleselect__radio-custom {
+  outline: 2px solid var(--ms-checkbox-color);
+  outline-offset: 2px;
+}
+
+/* Checked state */
+.ss-singleselect__radio:checked + .ss-singleselect__radio-custom {
+  background-color: var(--ms-checkbox-color);
+  border-color: var(--ms-checkbox-color);
+}
+
+/* Radio dot (inner circle) */
+.ss-singleselect__radio:checked + .ss-singleselect__radio-custom::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background-color: white;
+  transform: translate(-50%, -50%);
+}
+
+/* Disabled state */
+.ss-singleselect__radio:disabled + .ss-singleselect__radio-custom {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ss-singleselect__radio-label:has(.ss-singleselect__radio:disabled) {
+  cursor: not-allowed;
+}
+
+/* Option Text */
+.ss-singleselect__option-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Empty State */
+.ss-singleselect__empty {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--ms-option-disabled-text);
+  font-size: 0.875rem;
+}
+
+/* Footer */
+.ss-singleselect__footer {
+  flex-shrink: 0;
+  display: flex;
+  gap: 0.5rem;
+  padding: var(--ms-footer-padding);
+  background-color: var(--ms-footer-bg);
+  border-top: 1px solid var(--ms-footer-border-top);
+}
+
+.ss-singleselect__button {
+  padding: var(--ms-button-padding);
+  background-color: var(--ms-button-bg);
+  border: none;
+  border-radius: var(--ms-button-radius);
+  color: var(--ms-button-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--ms-animation-duration) var(--ms-animation-easing);
+}
+
+.ss-singleselect__button:hover {
+  background-color: var(--ms-button-hover-bg);
+}
+
+.ss-singleselect__button:focus {
+  outline: none;
+  box-shadow: var(--ms-button-focus-ring);
+}
+
+/* Live Region (Screen Reader Only) */
+.ss-singleselect__live-region {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Scrollbar Styling */
+.ss-singleselect__options::-webkit-scrollbar {
+  width: var(--ms-scrollbar-width);
+}
+
+.ss-singleselect__options::-webkit-scrollbar-track {
+  background-color: var(--ms-scrollbar-track-bg);
+}
+
+.ss-singleselect__options::-webkit-scrollbar-thumb {
+  background-color: var(--ms-scrollbar-thumb-bg);
+  border-radius: var(--ms-scrollbar-thumb-radius);
+}
+
+.ss-singleselect__options::-webkit-scrollbar-thumb:hover {
+  background-color: var(--ms-scrollbar-thumb-hover-bg);
+}
+
+/* No Animation Mode */
+.ss-singleselect--no-animation .ss-singleselect__trigger,
+.ss-singleselect--no-animation .ss-singleselect__dropdown,
+.ss-singleselect--no-animation .ss-singleselect__option,
+.ss-singleselect--no-animation .ss-singleselect__button,
+.ss-singleselect--no-animation .ss-singleselect__expand-icon,
+.ss-singleselect--no-animation .ss-singleselect__caret,
+.ss-singleselect--no-animation .ss-singleselect__radio-custom {
+  transition: none !important;
+}

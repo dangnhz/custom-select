@@ -1,0 +1,107 @@
+{
+  "name": "@dangnhz/custom-select",
+  "version": "1.0.4",
+  "description": "A lightweight, accessible TypeScript library for custom single and multi-select dropdowns that transforms native HTML select elements into modern, customizable interfaces",
+  "type": "module",
+  "main": "./dist/custom-select.umd.min.js",
+  "module": "./dist/custom-select.min.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/custom-select.min.js",
+      "require": "./dist/custom-select.umd.min.js"
+    },
+    "./multi": {
+      "types": "./dist/index-multi.d.ts",
+      "import": "./dist/custom-select-multi.min.js"
+    },
+    "./single": {
+      "types": "./dist/index-single.d.ts",
+      "import": "./dist/custom-select-single.min.js"
+    },
+    "./styles.css": "./dist/styles.min.css",
+    "./multi.css": "./dist/custom-select-multi.css",
+    "./single.css": "./dist/custom-select-single.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && npm run build:main && npm run build:multi && npm run build:single && node scripts/minify.js",
+    "build:main": "vite build",
+    "build:multi": "vite build --config vite.config.multi.ts",
+    "build:single": "vite build --config vite.config.single.ts",
+    "build:watch": "vite build --watch",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "format": "prettier --write \"src/**/*.{ts,css}\" \"examples/**/*.html\"",
+    "format:check": "prettier --check \"src/**/*.{ts,css}\" \"examples/**/*.html\"",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "keywords": [
+    "custom-select",
+    "select",
+    "multiselect",
+    "multi-select",
+    "single-select",
+    "dropdown",
+    "checkbox",
+    "radio",
+    "accessible",
+    "wcag",
+    "a11y",
+    "typescript",
+    "vanilla-js",
+    "nested-options",
+    "hierarchical",
+    "form",
+    "ui",
+    "component",
+    "zero-dependencies"
+  ],
+  "author": {
+    "name": "dangnhz",
+    "url": "https://github.com/dangnhz"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dangnhz/custom-select.git"
+  },
+  "homepage": "https://github.com/dangnhz/custom-select#readme",
+  "bugs": "https://github.com/dangnhz/custom-select/issues",
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/node": "^22.10.2",
+    "@vitest/ui": "^2.1.8",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "jsdom": "^25.0.1",
+    "lightningcss": "^1.30.2",
+    "prettier": "^3.4.2",
+    "terser": "^5.44.0",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.1",
+    "vite": "^6.0.3",
+    "vitest": "^2.1.8"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
