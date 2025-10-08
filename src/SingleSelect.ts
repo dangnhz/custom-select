@@ -249,6 +249,7 @@ export class SingleSelect implements SingleSelectInstance {
         'aria-label': 'Single-select options',
         'aria-hidden': 'true',
         'aria-modal': 'false',
+        inert: '',
       }
     );
 
@@ -359,6 +360,7 @@ export class SingleSelect implements SingleSelectInstance {
       role: 'option',
       'aria-selected': option.selected ? 'true' : 'false',
       'data-value': option.value,
+      tabindex: option.disabled ? '-1' : '0',
     });
 
     if (option.disabled) {
@@ -402,6 +404,7 @@ export class SingleSelect implements SingleSelectInstance {
         name: `ss-radio-${this.selectElement.id || 'select'}`,
         'aria-label': option.text,
         'aria-hidden': 'true',
+        tabindex: '-1',
       });
 
       radio.checked = option.selected;
@@ -541,6 +544,27 @@ export class SingleSelect implements SingleSelectInstance {
       };
       this.optionsList.addEventListener('click', optionsClickHandler);
       this.eventHandlers.set('options:click', optionsClickHandler);
+
+      // Note: Enter/Space handling is done in handleKeyboardNav which works for both
+      // Arrow key navigation and Tab navigation (via focusedOptionIndex sync)
+
+      // Focus handler to sync focusedOptionIndex when tabbing through options
+      const optionsFocusHandler = (e: Event) => {
+        const target = e.target as HTMLElement;
+        if (target.classList.contains('ss-singleselect__option')) {
+          const value = target.getAttribute('data-value');
+          if (value !== null) {
+            const visibleOptions = this.getVisibleOptions();
+            const index = visibleOptions.findIndex((opt) => opt.value === value);
+            if (index !== -1) {
+              this.focusedOptionIndex = index;
+              this.updateOptionFocus(visibleOptions);
+            }
+          }
+        }
+      };
+      this.optionsList.addEventListener('focusin', optionsFocusHandler);
+      this.eventHandlers.set('options:focusin', optionsFocusHandler);
     }
 
     // Footer buttons - event delegation
@@ -720,6 +744,7 @@ export class SingleSelect implements SingleSelectInstance {
     // Handle option selection
     this.handleOptionClick(option);
   }
+
 
   /**
    * Handle option click (selection)
@@ -1134,6 +1159,13 @@ export class SingleSelect implements SingleSelectInstance {
     this.updateTriggerText();
 
     this.emitChangeEvent();
+
+    // Auto-close if configured and dropdown is open
+    if (this._isOpen && this.config.closeOnSelect) {
+      setTimeout(() => {
+        this.close();
+      }, 100); // Small delay for UX
+    }
   }
 
   /**
@@ -1177,6 +1209,9 @@ export class SingleSelect implements SingleSelectInstance {
     addClass(this.trigger!, 'ss-singleselect__trigger--open');
     this.dropdown?.setAttribute('aria-hidden', 'false');
 
+    // Remove inert to allow focus within dropdown
+    this.dropdown?.removeAttribute('inert');
+
     // Position dropdown
     this.positionDropdown();
 
@@ -1208,6 +1243,9 @@ export class SingleSelect implements SingleSelectInstance {
     this.trigger?.setAttribute('aria-expanded', 'false');
     removeClass(this.trigger!, 'ss-singleselect__trigger--open');
     this.dropdown?.setAttribute('aria-hidden', 'true');
+
+    // Add inert to prevent focus on hidden dropdown elements
+    this.dropdown?.setAttribute('inert', '');
 
     // Blur any focused element inside dropdown
     if (this.dropdown && document.activeElement && this.dropdown.contains(document.activeElement)) {

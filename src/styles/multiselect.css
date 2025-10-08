@@ -12,9 +12,6 @@
 .ms-multiselect *::after {
   box-sizing: border-box;
 }
-/* ===========================
-   Base Styles
-   =========================== */
 
 .ms-multiselect {
   position: relative;
@@ -307,8 +304,13 @@
 .ms-multiselect__checkbox {
   position: absolute;
   opacity: 0;
-  width: 0;
-  height: 0;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
 }
 
 .ms-multiselect__checkbox-custom {
@@ -317,7 +319,7 @@
   flex-shrink: 0;
   width: var(--ms-checkbox-size);
   height: var(--ms-checkbox-size);
-  border: 2px solid var(--ms-checkbox-border);
+  border: 1px solid var(--ms-checkbox-border);
   border-radius: 3px;
   background-color: var(--ms-checkbox-bg);
   transition: all var(--ms-animation-duration) var(--ms-animation-easing);
@@ -346,8 +348,8 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 4px;
-  height: 8px;
+  width: 6px;
+  height: 12px;
   border: solid white;
   border-width: 0 2px 2px 0;
   transform: translate(-50%, -60%) rotate(45deg);

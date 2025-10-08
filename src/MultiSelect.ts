@@ -263,6 +263,7 @@ export class MultiSelect implements MultiSelectInstance {
         'aria-label': 'Multi-select options',
         'aria-hidden': 'true',
         'aria-modal': 'false',
+        inert: '',
       }
     );
 
@@ -372,6 +373,7 @@ export class MultiSelect implements MultiSelectInstance {
       role: 'option',
       'aria-selected': option.selected ? 'true' : 'false',
       'data-value': option.value,
+      tabindex: option.disabled ? '-1' : '0',
     });
 
     if (option.disabled) {
@@ -413,6 +415,7 @@ export class MultiSelect implements MultiSelectInstance {
       const checkbox = createElement('input', 'ms-multiselect__checkbox', {
         type: 'checkbox',
         'aria-label': option.text,
+        tabindex: '-1',
       });
 
       checkbox.checked = option.selected;
@@ -1002,8 +1005,20 @@ export class MultiSelect implements MultiSelectInstance {
   private handleFocusChange(e: FocusEvent): void {
     const target = e.target as HTMLElement;
 
-    // If a checkbox receives focus, update focusedOptionIndex
-    if (target?.classList.contains('ms-multiselect__checkbox')) {
+    // If an option div or checkbox receives focus, update focusedOptionIndex
+    if (target?.classList.contains('ms-multiselect__option')) {
+      // Option div itself received focus
+      const value = target.getAttribute('data-value');
+      if (value) {
+        const visibleOptions = this.getVisibleOptions();
+        const index = visibleOptions.findIndex((opt) => opt.value === value);
+        if (index !== -1) {
+          this.focusedOptionIndex = index;
+          this.updateOptionFocus(visibleOptions);
+        }
+      }
+    } else if (target?.classList.contains('ms-multiselect__checkbox')) {
+      // Checkbox received focus
       const optionEl = target.closest('.ms-multiselect__option')!;
       if (optionEl) {
         const value = optionEl.getAttribute('data-value');
@@ -1354,6 +1369,9 @@ export class MultiSelect implements MultiSelectInstance {
     addClass(this.trigger!, 'ms-multiselect__trigger--open');
     this.dropdown?.setAttribute('aria-hidden', 'false');
 
+    // Remove inert to allow focus within dropdown
+    this.dropdown?.removeAttribute('inert');
+
     // Position dropdown
     this.positionDropdown();
 
@@ -1385,6 +1403,9 @@ export class MultiSelect implements MultiSelectInstance {
     this.trigger?.setAttribute('aria-expanded', 'false');
     removeClass(this.trigger!, 'ms-multiselect__trigger--open');
     this.dropdown?.setAttribute('aria-hidden', 'true');
+
+    // Add inert to prevent focus on hidden dropdown elements
+    this.dropdown?.setAttribute('inert', '');
 
     // Blur any focused element inside dropdown
     if (this.dropdown && document.activeElement && this.dropdown.contains(document.activeElement)) {

@@ -180,7 +180,7 @@ describe('SingleSelect - Dropdown Control', () => {
     setTimeout(() => {
       expect(ss.isOpen).toBe(false);
       done();
-    }, 150);
+    }, 200);
   });
 
   it('stays open when closeOnSelect is false', () => {

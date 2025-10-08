@@ -100,7 +100,7 @@ describe('SingleSelect - Interaction Tests', () => {
     setTimeout(() => {
       expect(ss.isOpen).toBe(false);
       done();
-    }, 150);
+    }, 200);
   });
 
   it('stays open after selection when closeOnSelect is false', () => {
