@@ -99,9 +99,13 @@ describe('SingleSelect - Interaction Tests', () => {
 
     // Wait for close delay (100ms) + animation duration (150ms) + buffer
     setTimeout(() => {
-      expect(ss.isOpen).toBe(false);
-      done();
-    }, 300);
+      try {
+        expect(ss.isOpen).toBe(false);
+        done();
+      } catch (error) {
+        done(error);
+      }
+    }, 350);
   });
 
   it('stays open after selection when closeOnSelect is false', () => {

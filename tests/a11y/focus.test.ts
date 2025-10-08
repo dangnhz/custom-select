@@ -53,25 +53,29 @@ describe('Focus: Return Focus', () => {
     select.remove();
   });
 
-  it('returns focus to trigger on close', () => {
+  it('returns focus to trigger on close', async () => {
     const trigger = document.querySelector('.ms-multiselect__trigger') as HTMLElement;
 
     ms.open();
     ms.close();
 
+    // Wait for async focus operation
+    await new Promise(resolve => setTimeout(resolve, 10));
     expect(document.activeElement).toBe(trigger);
   });
 
-  it('returns focus to trigger on Escape', () => {
+  it('returns focus to trigger on Escape', async () => {
     const trigger = document.querySelector('.ms-multiselect__trigger') as HTMLElement;
 
     ms.open();
     fireEvent.keyDown(document, { key: 'Escape' });
 
+    // Wait for async focus operation
+    await new Promise(resolve => setTimeout(resolve, 10));
     expect(document.activeElement).toBe(trigger);
   });
 
-  it('returns focus to trigger when clicking outside', () => {
+  it('returns focus to trigger when clicking outside', async () => {
     const trigger = document.querySelector('.ms-multiselect__trigger') as HTMLElement;
     const outsideElement = document.createElement('div');
     document.body.appendChild(outsideElement);
@@ -79,6 +83,8 @@ describe('Focus: Return Focus', () => {
     ms.open();
     fireEvent.click(outsideElement);
 
+    // Wait for async focus operation
+    await new Promise(resolve => setTimeout(resolve, 10));
     expect(document.activeElement).toBe(trigger);
 
     outsideElement.remove();

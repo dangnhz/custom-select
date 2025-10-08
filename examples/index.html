@@ -436,7 +436,8 @@ window.collapseAll = () => filesMs.collapseAll();</code></pre>
       searchEnabled: true,
       closeOnSelect: true,
       showClose: false,
-      placeholder: 'Choose a country...'
+      placeholder: 'Choose a country...',
+      returnFocusOnClose: true
     });
 
     // SingleSelect - Radio buttons
@@ -454,7 +455,8 @@ window.collapseAll = () => filesMs.collapseAll();</code></pre>
       searchEnabled: true,
       defaultExpanded: true,
       closeOnSelect: true,
-      placeholder: 'Choose a technology...'
+      placeholder: 'Choose a technology...',
+      position: 'bottom'
     });
 
     // MultiSelect - Default
@@ -462,6 +464,8 @@ window.collapseAll = () => filesMs.collapseAll();</code></pre>
       placeholder: 'Select countries...',
       searchEnabled: true,
       searchAutoFocus: true,
+      returnFocusOnClose: true,
+       position: 'bottom'
     });
 
     // Tags mode

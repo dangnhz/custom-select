@@ -313,7 +313,7 @@ describe('SingleSelect ARIA: Focus Management', () => {
     expect(document.activeElement).not.toBe(searchInput);
   });
 
-  it('returns focus to trigger on close when returnFocusOnClose is true', () => {
+  it('returns focus to trigger on close when returnFocusOnClose is true', async () => {
     ss.destroy();
     ss = new SingleSelect(select, { returnFocusOnClose: true });
 
@@ -322,6 +322,8 @@ describe('SingleSelect ARIA: Focus Management', () => {
     ss.open();
     ss.close();
 
+    // Wait for async focus operation
+    await new Promise(resolve => setTimeout(resolve, 10));
     expect(document.activeElement).toBe(trigger);
   });
 
@@ -451,9 +453,13 @@ describe('SingleSelect ARIA: Live Regions', () => {
     ss.setValue('1');
 
     setTimeout(() => {
-      expect(liveRegion.textContent).toContain('Option 1');
-      done();
-    }, 100);
+      try {
+        expect(liveRegion.textContent).toContain('Option 1');
+        done();
+      } catch (error) {
+        done(error);
+      }
+    }, 150);
   });
 });
 

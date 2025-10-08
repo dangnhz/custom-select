@@ -258,7 +258,7 @@ describe('Keyboard: Escape', () => {
     expect(ms.isOpen).toBe(false);
   });
 
-  it('returns focus to trigger', () => {
+  it('returns focus to trigger', async () => {
     // Create a new instance with returnFocusOnClose enabled for this specific test
     ms.destroy();
     const msWithFocus = new MultiSelect(select, { returnFocusOnClose: true });
@@ -268,6 +268,8 @@ describe('Keyboard: Escape', () => {
 
     fireEvent.keyDown(document, { key: 'Escape' });
 
+    // Wait for async focus operation
+    await new Promise(resolve => setTimeout(resolve, 10));
     expect(document.activeElement).toBe(trigger);
     msWithFocus.destroy();
   });

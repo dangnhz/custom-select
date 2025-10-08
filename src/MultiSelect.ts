@@ -1426,13 +1426,16 @@ export class MultiSelect implements MultiSelectInstance {
     this.focusedOptionIndex = -1;
 
     // Focus management based on config
-    if (this.config.returnFocusOnClose) {
-      // Return focus to trigger button
-      this.trigger?.focus();
-    } else {
-      // Blur the trigger button to remove focus
-      this.trigger?.blur();
-    }
+    // Use setTimeout to ensure focus happens after any pending blur operations
+    setTimeout(() => {
+      if (this.config.returnFocusOnClose) {
+        // Return focus to trigger button
+        this.trigger?.focus();
+      } else {
+        // Blur the trigger button to remove focus
+        this.trigger?.blur();
+      }
+    }, 0);
 
     // Announce to screen readers
     const count = this.selectedValues.length;
