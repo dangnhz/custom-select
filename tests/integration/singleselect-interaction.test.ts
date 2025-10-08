@@ -97,10 +97,11 @@ describe('SingleSelect - Interaction Tests', () => {
     const option = document.querySelector('[data-value="1"]') as HTMLElement;
     fireEvent.click(option);
 
+    // Wait for close delay (100ms) + animation duration (150ms) + buffer
     setTimeout(() => {
       expect(ss.isOpen).toBe(false);
       done();
-    }, 200);
+    }, 300);
   });
 
   it('stays open after selection when closeOnSelect is false', () => {

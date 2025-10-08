@@ -176,11 +176,11 @@ describe('SingleSelect - Dropdown Control', () => {
     ss.open();
     ss.setValue('1');
 
-    // closeOnSelect uses setTimeout
+    // Wait for close delay (100ms) + animation duration (150ms) + buffer
     setTimeout(() => {
       expect(ss.isOpen).toBe(false);
       done();
-    }, 200);
+    }, 300);
   });
 
   it('stays open when closeOnSelect is false', () => {
