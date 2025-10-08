@@ -1361,14 +1361,9 @@ export class MultiSelect implements MultiSelectInstance {
     if (this.searchInput && this.config.searchEnabled && this.config.searchAutoFocus) {
       // Focus search input if enabled and auto-focus is on
       this.searchInput.focus();
-      this.focusedOptionIndex = -1;
-    } else {
-      // Focus first option if no search or auto-focus is off
-      const visibleOptions = this.getVisibleOptions();
-      if (visibleOptions.length > 0) {
-        this.focusedOptionIndex = 0;
-      }
     }
+    // Always start with no option focused - user navigates with keyboard
+    this.focusedOptionIndex = -1;
 
     // Announce to screen readers
     const optionCount = this.getVisibleOptions().length;

@@ -26,14 +26,6 @@ describe('Focus: Initial Focus', () => {
     expect(document.activeElement).toBe(searchInput);
   });
 
-  it('focuses first option when dropdown opens without search', () => {
-    ms = new MultiSelect(select, { searchEnabled: false });
-    ms.open();
-
-    const firstOption = document.querySelector('.ms-multiselect__option');
-    expect(firstOption?.classList.contains('ms-multiselect__option--focused')).toBe(true);
-  });
-
   it('trigger button is focusable when closed', () => {
     ms = new MultiSelect(select);
 
