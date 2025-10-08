@@ -895,7 +895,7 @@ MIT © [Your Organization]
 
 ## 🔗 Links
 
-- [GitHub Repository](https://github.com/dangnhz/multiselect)
-- [Issue Tracker](https://github.com/dangnhz/multiselect/issues)
+- [GitHub Repository](https://github.com/dangnhz/custom-select)
+- [Issue Tracker](https://github.com/dangnhz/custom-select/issues)
 - [Changelog](CHANGELOG.md)
-- [npm Package](https://www.npmjs.com/package/@dangnhz/multiselect)
+- [npm Package](https://www.npmjs.com/package/@dangnhz/custom-select)
