@@ -8,12 +8,12 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index-single.ts'),
       name: 'SingleSelect',
       formats: ['es'],
-      fileName: () => 'custom-select-single.js',
+      fileName: () => 'single-select.js',
     },
     rollupOptions: {
       output: {
         exports: 'named',
-        assetFileNames: 'custom-select-single.css',
+        assetFileNames: 'single-select.css',
       },
     },
     sourcemap: true,

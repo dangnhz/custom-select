@@ -9,7 +9,7 @@
  * CSS is minified by Vite using LightningCSS during the build process.
  */
 
-import { readFileSync, writeFileSync, existsSync, renameSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, renameSync, unlinkSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { minify } from 'terser';
@@ -67,9 +67,9 @@ const jsFiles = [
   { from: 'custom-select.js', to: 'custom-select.min.js' },
   { from: 'custom-select.umd.js', to: 'custom-select.umd.min.js' },
   // MultiSelect-only bundle - ES only
-  { from: 'custom-select-multi.js', to: 'custom-select-multi.min.js' },
+  { from: 'multi-select.js', to: 'multi-select.min.js' },
   // SingleSelect-only bundle - ES only
-  { from: 'custom-select-single.js', to: 'custom-select-single.min.js' },
+  { from: 'single-select.js', to: 'single-select.min.js' },
 ];
 
 (async () => {
@@ -85,6 +85,20 @@ const jsFiles = [
 
   for (const { from, to } of jsFiles) {
     await minifyJS(from, to);
+
+    // Remove unminified file after minification
+    const unminifiedPath = resolve(distDir, from);
+    if (existsSync(unminifiedPath)) {
+      unlinkSync(unminifiedPath);
+    }
+
+    // Remove unminified sourcemap
+    const unminifiedMapPath = `${unminifiedPath}.map`;
+    if (existsSync(unminifiedMapPath)) {
+      unlinkSync(unminifiedMapPath);
+    }
   }
-  console.log('\n✅ Build complete!');
+
+  console.log('\n🧹 Cleaned up unminified files');
+  console.log('✅ Build complete!');
 })();

@@ -14,15 +14,15 @@
     },
     "./multi": {
       "types": "./dist/index-multi.d.ts",
-      "import": "./dist/custom-select-multi.min.js"
+      "import": "./dist/multi-select.min.js"
     },
     "./single": {
       "types": "./dist/index-single.d.ts",
-      "import": "./dist/custom-select-single.min.js"
+      "import": "./dist/single-select.min.js"
     },
     "./styles.css": "./dist/styles.min.css",
-    "./multi.css": "./dist/custom-select-multi.css",
-    "./single.css": "./dist/custom-select-single.css",
+    "./multi.css": "./dist/multi-select.css",
+    "./single.css": "./dist/single-select.css",
     "./package.json": "./package.json"
   },
   "files": [
@@ -35,7 +35,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc && npm run build:main && npm run build:multi && npm run build:single && node scripts/minify.js",
+    "build": "npm run build:main && npm run build:multi && npm run build:single && tsc && node scripts/minify.js",
     "build:main": "vite build",
     "build:multi": "vite build --config vite.config.multi.ts",
     "build:single": "vite build --config vite.config.single.ts",

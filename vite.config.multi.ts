@@ -8,12 +8,12 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index-multi.ts'),
       name: 'MultiSelect',
       formats: ['es'],
-      fileName: () => 'custom-select-multi.js',
+      fileName: () => 'multi-select.js',
     },
     rollupOptions: {
       output: {
         exports: 'named',
-        assetFileNames: 'custom-select-multi.css',
+        assetFileNames: 'multi-select.css',
       },
     },
     sourcemap: true,
