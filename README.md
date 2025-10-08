@@ -274,6 +274,8 @@ console.log(`Initialized ${instances.length} instances`);
 
 ## ⚙️ Configuration Options
 
+### MultiSelect Configuration
+
 Complete list of all 31 configuration options:
 
 | Option | Type | Default | Description |
@@ -284,9 +286,11 @@ Complete list of all 31 configuration options:
 | `searchEnabled` | `boolean` | `true` | Enable/disable search functionality |
 | `searchDebounce` | `number` | `300` | Search debounce delay in milliseconds |
 | **Footer Options** |
-| `showClearAll` | `boolean` | `true` | Show "Clear All" button in footer |
+| `showClearAll` | `boolean` | `true` | Show "Clear All" button in footer (multi-select) |
+| `showClear` | `boolean` | `false` | Show "Clear" button in footer (single-select) |
 | `showClose` | `boolean` | `true` | Show "Close" button in footer |
-| `clearAllText` | `string` | `'Clear All'` | Text for clear all button |
+| `clearAllText` | `string` | `'Clear All'` | Text for clear all button (multi-select) |
+| `clearText` | `string` | `'Clear'` | Text for clear button (single-select) |
 | `closeText` | `string` | `'Close'` | Text for close button |
 | **Display Options** |
 | `selectedDisplayMode` | `'count' \| 'list' \| 'tags' \| 'custom'` | `'count'` | How to display selections in trigger |
@@ -316,6 +320,20 @@ Complete list of all 31 configuration options:
 | `indentSize` | `number` | `20` | Indentation size in pixels for nested levels |
 | `expandIconCollapsed` | `string` | `'▶'` | Icon for collapsed/closed groups |
 | `expandIconExpanded` | `string` | `'▼'` | Icon for expanded/open groups |
+
+### SingleSelect Configuration
+
+SingleSelect shares most options with MultiSelect, plus these specific options:
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| **SingleSelect Specific** |
+| `showRadioButtons` | `boolean` | `true` | Show radio button UI for options |
+| `allowDeselect` | `boolean` | `false` | Allow clicking selected item to deselect it |
+| `closeOnSelect` | `boolean` | `true` | Auto-close dropdown after selection |
+| `showClear` | `boolean` | `false` | Show "Clear" button in footer (keeps dropdown open when clicked) |
+
+**Note:** SingleSelect does not support `selectedDisplayMode`, `maxSelectedDisplay`, `maxTags`, `selectedFormat`, `showClearAll`, `showParentCheckbox`, or `cascadeSelection` as these are multi-select specific features.
 
 [See TypeScript interfaces for complete type definitions](#-typescript-support)
 
@@ -421,7 +439,10 @@ const value = ss.getValue();  // Returns: string | null
 // Set selected value programmatically
 ss.setValue('value1');
 
-// Clear selection
+// Set value without auto-closing dropdown (advanced)
+ss.setValue('value1', { skipAutoClose: true });
+
+// Clear selection (does not close dropdown)
 ss.clear();
 ```
 

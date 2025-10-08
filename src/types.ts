@@ -277,7 +277,7 @@ export interface SingleSelectInstance {
   /** Get currently selected value (or null if nothing selected) */
   getValue(): string | null;
   /** Set selected value programmatically */
-  setValue(value: string | null): void;
+  setValue(value: string | null, options?: { skipAutoClose?: boolean }): void;
   /** Clear selection */
   clear(): void;
 

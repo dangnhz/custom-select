@@ -1127,7 +1127,7 @@ export class SingleSelect implements SingleSelectInstance {
   /**
    * Set selected value programmatically
    */
-  public setValue(value: string | null): void {
+  public setValue(value: string | null, options?: { skipAutoClose?: boolean }): void {
     // Treat empty string as null for single select
     const newValue = value === '' ? null : value;
 
@@ -1160,8 +1160,8 @@ export class SingleSelect implements SingleSelectInstance {
 
     this.emitChangeEvent();
 
-    // Auto-close if configured and dropdown is open
-    if (this._isOpen && this.config.closeOnSelect) {
+    // Auto-close if configured and dropdown is open (unless skipAutoClose is true)
+    if (this._isOpen && this.config.closeOnSelect && !options?.skipAutoClose) {
       setTimeout(() => {
         this.close();
       }, 100); // Small delay for UX
@@ -1178,7 +1178,8 @@ export class SingleSelect implements SingleSelectInstance {
     }
 
     const previousValue = this.selectedValue;
-    this.setValue(null);
+    // Skip auto-close when clearing via the clear button
+    this.setValue(null, { skipAutoClose: true });
 
     // Emit clear event
     const detail: SingleSelectClearEventDetail = {
